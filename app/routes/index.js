@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 
-router.get('/', inedx); // 首页
+router.get('/', index); // 首页
 
-function(req, res, next) {
+function index (req, res, next) {
     res.render('index', {
         title: 'Express'
     });

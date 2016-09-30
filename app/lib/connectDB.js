@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var config = require('../config/config.js');
+var config = require('../../config/config.js');
 var fs = require('fs');
 var path = require('path');
 
