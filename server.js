@@ -5,13 +5,16 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var ejs = require('ejs');
+var colors = require('colors');
+
 var config = require('./config/config.js');
+
 var app = express();
 
 // 视图层模板引擎
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
+app.set('view engine', 'html');
+app.engine('html', ejs.__express);
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -30,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'static/dist')));
         var handle = require('./app/routes/' + obj.name);
         app.use(url, handle);
     })
-    console.log('路由配置完成');
+    console.log('路由配置完成'.green);
 })()
 
 // 连接数据库
@@ -59,4 +62,4 @@ app.use(function(err, req, res, next) {
 
 });
 
-app.listen(config.port, console.log('服务器启动：' + config.port + '端口'));
+app.listen(config.port, console.log(('服务器启动：' + config.port + '端口').green));

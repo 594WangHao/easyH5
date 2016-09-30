@@ -32,9 +32,9 @@ gulp.task('css', function() {
 gulp.task('js', function() {
     return gulp
         .src('./static/src/js/*.js')
-        .pipe(concat('easyH5.js', {
-            newLine: ';'
-        }))
+
+        .pipe(concat('easyH5.js',{newLine: ';'}))
+
         .pipe(rename({
             suffix: '.min'
         }))

@@ -1,3 +1,4 @@
+var colors = require('colors');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -14,4 +15,4 @@ var UserSchema = new Schema({
 
 mongoose.model('User', UserSchema);
 
-console.log('用户模型已建立');
+console.log('用户模型已建立'.green);

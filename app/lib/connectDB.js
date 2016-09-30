@@ -6,20 +6,15 @@ var path = require('path');
 module.exports = function() {
     var db = mongoose.connect(config.uri, function(err) {
         if (err) {
-            console.error('无法连接到数据库');
-            console.log(err);
-            return
+            // console.error('无法连接到数据库');
+            console.error('无法连接到数据库'.red, err.toString().red);
+            process.exit();
         }
-        console.log('连接数据库成功');
+        console.log('连接数据库成功'.green);
         //自动连接模型
         fs.readdirSync(path.join(__dirname, '../models')).forEach(function(name) {
             require('../models/' + name);
-            console.log('读取模型完成');
+            console.log('读取模型完成'.green);
         });
     });
-    mongoose.connection.on('error', function(err) {
-        console.error('MongoDB connection error: ' + err);
-        process.exit(-1);
-    });
-    return db;
 }

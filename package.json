@@ -1,34 +1,42 @@
 {
-    "name": "easyh5",
-    "version": "0.0.1",
-    "scripts": {
-        "start": "node app.js"
-    },
-    "dependencies": {
-        "body-parser": "~1.15.1",
-        "cookie-parser": "~1.4.3",
-        "debug": "~2.2.0",
-        "ejs": "^2.5.2",
-        "express": "~4.13.4",
-        "express-session": "^1.14.1",
-        "mongoose": "^4.6.1",
-        "morgan": "~1.7.0",
-        "serve-favicon": "~2.3.0"
-    },
-    "description": "可视化手机H5制作工具，类似于市面上的易企秀。个人通过MEVN（mongodb + express + vue + nodejs）进行实现",
-    "main": "app.js",
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:594WangHao/easyH5.git"
-    },
-    "keywords": [
-        "H5",
-        "可视化"
-    ],
-    "author": "vortex_wh",
-    "license": "ISC",
-    "devDependencies": {
-        "gulp": "^3.9.1",
-        "gulp-less": "^3.1.0"
-    }
+  "name": "easyh5",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "body-parser": "~1.15.1",
+    "colors": "^1.1.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "ejs": "^2.5.2",
+    "express": "~4.13.4",
+    "express-session": "^1.14.1",
+    "mongoose": "^4.6.1",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.0"
+  },
+  "description": "可视化手机H5制作工具，类似于市面上的易企秀。个人通过MEVN（mongodb + express + vue + nodejs）进行实现",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:594WangHao/easyH5.git"
+  },
+  "keywords": [
+    "H5",
+    "可视化"
+  ],
+  "author": "vortex_wh",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-clean-css": "^2.0.13",
+    "gulp-concat": "^2.6.0",
+    "gulp-less": "^3.1.0",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^2.0.0"
+  }
 }
