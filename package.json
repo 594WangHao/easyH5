@@ -14,7 +14,8 @@
     "express-session": "^1.14.1",
     "mongoose": "^4.6.1",
     "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "vue": "^2.0.1"
   },
   "description": "可视化手机H5制作工具，类似于市面上的易企秀。个人通过MEVN（mongodb + express + vue + nodejs）进行实现",
   "main": "app.js",

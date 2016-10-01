@@ -6,9 +6,8 @@ var path = require('path');
 module.exports = function() {
     var db = mongoose.connect(config.uri, function(err) {
         if (err) {
-            // console.error('无法连接到数据库');
             console.error('无法连接到数据库'.red, err.toString().red);
-            process.exit();
+            process.exit(0);
         }
         console.log('连接数据库成功'.green);
         //自动连接模型
