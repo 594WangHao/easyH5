@@ -1,15 +1,17 @@
 var gulp = require('gulp');
-var less = require('gulp-less');
+var sass = require('gulp-sass');
 var cleanCSS = require('gulp-clean-css');
 var nodemon = require('gulp-nodemon');
 var concat = require('gulp-concat');
 var clean = require('gulp-clean');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
-var sourcemaps = require('gulp-sourcemaps');
+var gulpWebpack = require('gulp-webpack');
+
+var webpackConfig = require('./webpack.config.js');
 
 gulp.task('default', ['clean'], function() {
-    gulp.start('css', 'js', 'img', 'start');
+    gulp.start('css', 'webpack', 'img', 'start', 'watch');
 })
 
 gulp.task('clean', function() {
@@ -18,10 +20,28 @@ gulp.task('clean', function() {
         .pipe(clean());
 });
 
+gulp.task('webpack', function(callback) {
+    gulp.src('./static/app/main.js')
+        .pipe(gulpWebpack({
+            watch: true,
+            output: {
+                filename: 'build.js'
+            },
+            module: {
+                loaders: [{
+                    test: /\.vue$/,
+                    loader: 'vue'
+                }]
+            },
+            devtool: '#inline-source-map'
+        }))
+        .pipe(gulp.dest('./static/dist/js/'));
+});
+
 gulp.task('css', function() {
     return gulp
-        .src('./static/src/less/*.less')
-        .pipe(less())
+        .src('./static/src/sass/*.scss')
+        .pipe(sass())
         .pipe(concat('easyH5.css'))
         .pipe(rename({
             suffix: '.min'
@@ -33,9 +53,6 @@ gulp.task('css', function() {
 gulp.task('js', function() {
     return gulp
         .src('./static/src/js/*.js')
-        .pipe(concat('easyH5.js', {
-            newLine: ';'
-        }))
         .pipe(rename({
             suffix: '.min'
         }))
@@ -57,7 +74,7 @@ gulp.task('start', function() {
         ],
         ext: 'js html',
         env: {
-            'NODE_ENV': 'development'
+            'NODE_ENV': 'production'
         }
     })
 });
@@ -71,5 +88,8 @@ gulp.task('watch', function() {
     });
     gulp.watch('./static/src/js/*.js', function() {
         gulp.run('js');
+    });
+    gulp.watch('./static/app/**/*', function() {
+        gulp.run('webpack');
     });
 });

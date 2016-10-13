@@ -4,7 +4,7 @@ var fs = require('fs');
 var path = require('path');
 
 module.exports = function() {
-    var db = mongoose.connect(config.uri, function(err) {
+    var db = mongoose.connect(config.DBUri, function(err) {
         if (err) {
             console.error('无法连接到数据库'.red, err.toString().red);
             process.exit(0);

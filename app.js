@@ -9,12 +9,17 @@ var ejs = require('ejs');
 var colors = require('colors');
 
 var config = require('./config/config.js');
+var routers = require('./config/routers.js');
 
 var app = express();
+
+// 连接数据库
+require('./server/common/connectDB.js')();
 
 // 视图层模板引擎
 app.set('view engine', 'html');
 app.engine('html', ejs.__express);
+app.set('views', __dirname + '/server/views');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -31,7 +36,7 @@ app.use(session(config.session))
 // 路由配置
 routes();
 function routes() {
-    config.routes.forEach(function(obj) {
+    routers.forEach(function(obj) {
         var url = obj.url;
         var name = obj.name;
         var handle = require('./server/routes/' + obj.name);
@@ -40,9 +45,6 @@ function routes() {
     console.log('路由配置完成'.green)
 }
 
-
-// 连接数据库
-require('./server/lib/connectDB.js')();
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
