@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var session = require('express-session');
 var path = require('path');
@@ -10,11 +12,12 @@ var colors = require('colors');
 
 var config = require('./config/config.js');
 var routers = require('./config/routers.js');
+var DB = require('./server/models/DB.js');
 
 var app = express();
 
-// 连接数据库
-require('./server/common/connectDB.js')();
+// 配置模型
+DB.setModel();
 
 // 视图层模板引擎
 app.set('view engine', 'html');

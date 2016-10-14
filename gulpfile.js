@@ -7,11 +7,12 @@ var clean = require('gulp-clean');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var gulpWebpack = require('gulp-webpack');
+var webpack = require('webpack');
 
 var webpackConfig = require('./webpack.config.js');
 
 gulp.task('default', ['clean'], function() {
-    gulp.start('css', 'webpack', 'img', 'start', 'watch');
+    gulp.start('webpack', 'js', 'css', 'img', 'start', 'watch');
 })
 
 gulp.task('clean', function() {
@@ -33,7 +34,13 @@ gulp.task('webpack', function(callback) {
                     loader: 'vue'
                 }]
             },
-            devtool: '#inline-source-map'
+            plugins: [
+                new webpack.optimize.UglifyJsPlugin({
+                    compress: {
+                        warnings: false
+                    }
+                })
+            ]
         }))
         .pipe(gulp.dest('./static/dist/js/'));
 });
@@ -52,11 +59,20 @@ gulp.task('css', function() {
 
 gulp.task('js', function() {
     return gulp
-        .src('./static/src/js/*.js')
-        .pipe(rename({
-            suffix: '.min'
+        .src('./static/src/js/entry.js')
+        .pipe(gulpWebpack({
+            watch: true,
+            output: {
+                filename: 'easyH5.js'
+            },
+            plugins: [
+                new webpack.optimize.UglifyJsPlugin({
+                    compress: {
+                        warnings: false
+                    }
+                })
+            ]
         }))
-        .pipe(uglify())
         .pipe(gulp.dest('./static/dist/js/'))
 });
 
