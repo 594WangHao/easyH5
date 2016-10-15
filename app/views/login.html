@@ -1,18 +1,17 @@
 <% include ./common/head.html %>
-
-    <form id="login">
+    <form id="loginForm" method="post" action="/login?url=<%= url %>">
         <h1>登录</h1>
         <input name="username" type="text" placeholder="用户名" required>
         <input name="password" type="password" placeholder="密码" required>
+        <label>
+            <input name="weekLogin" type="checkbox" checked="on">一周内免登录</label>
         <button type="submit">登录</button>
     </form>
-    <form id="register">
+    <form id="registerFrom" method="post" action="/register?url=<%= url %>">
         <h1>注册</h1>
         <input name="regUsername" type="text" placeholder="用户名" required>
         <input name="regPassword" type="password" placeholder="密码" required>
         <input name="regPasswordAgain" type="password" placeholder="确认密码" required>
         <button type="submit">注册</button>
     </form>
-    </div>
-
-<% include ./common/foot.html %>
+    <% include ./common/foot.html %>

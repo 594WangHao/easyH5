@@ -12,7 +12,7 @@ var colors = require('colors');
 
 var config = require('./config/config.js');
 var routers = require('./config/routers.js');
-var DB = require('./server/models/DB.js');
+var DB = require('./app/models/DB.js');
 
 var app = express();
 
@@ -22,7 +22,7 @@ DB.setModel();
 // 视图层模板引擎
 app.set('view engine', 'html');
 app.engine('html', ejs.__express);
-app.set('views', __dirname + '/server/views');
+app.set('views', __dirname + '/app/views');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -42,7 +42,7 @@ function routes() {
     routers.forEach(function(obj) {
         var url = obj.url;
         var name = obj.name;
-        var handle = require('./server/routes/' + obj.name);
+        var handle = require('./app/routes/' + obj.name);
         app.use(url, handle);
     });
     console.log('路由配置完成'.green)

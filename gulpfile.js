@@ -12,7 +12,7 @@ var webpack = require('webpack');
 var webpackConfig = require('./webpack.config.js');
 
 gulp.task('default', ['clean'], function() {
-    gulp.start('webpack', 'js', 'css', 'img', 'start', 'watch');
+    gulp.start('webpack', 'css', 'img', 'start', 'watch');
 })
 
 gulp.task('clean', function() {
@@ -73,6 +73,10 @@ gulp.task('js', function() {
                 })
             ]
         }))
+        // .pipe(uglify())
+        // .pipe(rename({
+        //     suffix: '.min'
+        // }))
         .pipe(gulp.dest('./static/dist/js/'))
 });
 
