@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var xss = require('xss');
-var moment = require('moment')();
 
 var utils = require('../utils/utils.js');
 var DB = require('../models/DB.js');
@@ -28,6 +27,7 @@ function getLogin(req, res, next) {
 function postLogin(req, res, next) {
     var username = xss(req.body.username);
     var password = xss(req.body.password);
+    var weekLogin = xss(req.body.weekLogin);
     var User = DB.getModel('User');
     User.findOne({
             username: username,
@@ -51,8 +51,11 @@ function postLogin(req, res, next) {
                 //             url: req.query.url ? req.query.url : '/'
                 //         }
                 //     });
-                res.cookie('login', true, { expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), httpOnly: true })
-                res.redirect(req.query.url ? req.query.url : '/')
+                if (weekLogin === 'on') {
+                    res.cookie('login', true, { expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), httpOnly: true });
+                    res.cookie('username', username, { expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), httpOnly: true });
+                }
+                res.redirect(req.query.url ? req.query.url : '/');
             }
         })
 }
@@ -96,7 +99,7 @@ function register(req, res, next) {
                         //         url: req.query.url ? req.query.url : '/'
                         //     }
                         // });
-                        res.redirect(req.query.url ? req.query.url : '/')
+                        res.redirect(req.query.url ? req.query.url : '/');
                     });
                 }
             })

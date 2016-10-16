@@ -27,6 +27,8 @@ var DB = {
             return;
         }
         return mongoose.model(type);
-    }
+    },
+
+
 };
 module.exports = DB;

@@ -14,5 +14,11 @@ module.exports = {
         date.setTime(date.getTime() + (minute * 60 * 1000));
         var expires = "expires=" + date.toUTCString();
         document.cookie = name + "=" + value + "; " + expires;
+    },
+    throwError: function(response) {
+        if (response.body.code !== 1) {
+            throw new Error(response.body.message);
+        }
+        return response;
     }
 }
