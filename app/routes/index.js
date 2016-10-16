@@ -11,6 +11,11 @@ router.post('/login', postLogin); /*登录*/
 router.post('/register', register); /*注册*/
 
 function index(req, res, next) {
+    if (!req.session.user) {
+        req.session.user = {
+            userName: req.cookies.userName
+        }
+    }
     res.render('index', {
         title: 'easyH5'
     });
@@ -25,12 +30,12 @@ function getLogin(req, res, next) {
 }
 
 function postLogin(req, res, next) {
-    var username = xss(req.body.username);
+    var userName = xss(req.body.userName);
     var password = xss(req.body.password);
     var weekLogin = xss(req.body.weekLogin);
     var User = DB.getModel('User');
     User.findOne({
-            username: username,
+            userName: userName,
             password: utils.md5(password)
         })
         .then(function(result) {
@@ -53,7 +58,7 @@ function postLogin(req, res, next) {
                 //     });
                 if (weekLogin === 'on') {
                     res.cookie('login', true, { expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), httpOnly: true });
-                    res.cookie('username', username, { expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), httpOnly: true });
+                    res.cookie('userName', userName, { expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), httpOnly: true });
                 }
                 res.redirect(req.query.url ? req.query.url : '/');
             }
@@ -61,7 +66,7 @@ function postLogin(req, res, next) {
 }
 
 function register(req, res, next) {
-    var username = xss(req.body.regUsername);
+    var userName = xss(req.body.reguserName);
     var regPassword = xss(req.body.regPassword);
     var regPasswordAgain = xss(req.body.regPasswordAgain);
 
@@ -74,7 +79,7 @@ function register(req, res, next) {
         res.send('<script>alert("两次输入密码不同")</script>')
     } else {
         var User = DB.getModel('User');
-        User.findOne({ username: username })
+        User.findOne({ userName: userName })
             .then(function(result) {
                 if (result) {
                     // res.send({
@@ -85,7 +90,7 @@ function register(req, res, next) {
                     res.send('<script>alert("用户名已存在")</script>')
                 } else {
                     var user = new User({
-                        username: username,
+                        userName: userName,
                         password: utils.md5(regPassword),
                         time: moment.format()
                     })

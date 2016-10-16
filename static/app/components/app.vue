@@ -28,15 +28,16 @@
     <!-- </transition> -->
 </template>
 <script>
-    var utils = require('../utils/utils.js');
     module.exports = {
-        data: {
-            edit: true,
-            user: {}
+        data: function() {
+            return {
+                edit: true,
+                user: {}
+            }
         },
         created: function() {
             this.$http.get('/api/userInfo')
-                .then(utils.throwError)
+                .then(this.$utils.throwError)
                 .then(function(response) {
                     this.user = response.body.data.user;
                 })
