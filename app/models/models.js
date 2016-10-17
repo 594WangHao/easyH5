@@ -6,7 +6,7 @@ module.exports = {
         password: { type: String, require: true },
         /*权限 用户：1 管理员：7 超级管理员：9*/
         jurisdiction: { type: Number, require: true, default: 1 },
-        time: { type: Number, require: true }
+        createTime: { type: Number, require: true }
     },
     Work: {
         userName: { type: String, require: true },

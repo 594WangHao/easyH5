@@ -20,7 +20,7 @@
             </ul>
             <ul>
                 <li @click="exit()">退出</li>
-                <li>{{user.username}}</li>
+                <li>{{user.userName}}</li>
             </ul>
         </header>
         <router-view></router-view>
@@ -31,7 +31,7 @@
     module.exports = {
         data: function() {
             return {
-                edit: true,
+                edit: this.$route.path.split('/')[1] === 'edit',
                 user: {}
             }
         },
@@ -41,20 +41,16 @@
                 .then(function(response) {
                     this.user = response.body.data.user;
                 })
-                .catch(function(err) {
-                    console.error(err);
-                });
+                .catch(this.$utils.catchError);
         },
         methods: {
             exit: function(event) {
                 this.$http.get('/api/exit')
-                    .then(utils.throwError)
+                    .then(this.$utils.throwError)
                     .then(function(response) {
                         window.location = response.body.data.url
                     })
-                    .catch(function(err) {
-                        console.error(err);
-                    });
+                    .catch(this.$utils.catchError);
             }
         }
     }

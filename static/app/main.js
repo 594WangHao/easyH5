@@ -15,7 +15,7 @@ var Index = require('./components/index/main.vue');
 var router = new VueRouter({
     routes: [
     {
-        path: '/edit/:workId',
+        path: '/edit/:_id',
         component: Edit,
     }, {
         path: '/',

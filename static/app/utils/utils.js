@@ -19,10 +19,19 @@ module.exports = {
             },
             throwError: function(response) {
                 if (response.body.code !== 1) {
-                    throw new Error(response.body.message);
+                    var err = new Error(response.body.message);
+                    err.name = '输入错误';
+                    throw err;
                 }
                 return response;
-            }
+            },
+            catchError: function(err) {
+                if (err.name === '输入错误') {
+                    alert(err.message)
+                } else {
+                    console.error(err)
+                }
+            },
         }
     }
 

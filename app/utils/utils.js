@@ -1,5 +1,6 @@
 var crypto = require('crypto');
 var moment = require('moment')();
+var colors = require('colors');
 
 module.exports = {
     checkLogin: function(req, res, next) {
@@ -30,5 +31,8 @@ module.exports = {
             }
 
         }
-    }
+    },
+    catchError: function(err) {
+        console.error(err.stack.red)
+    },
 }

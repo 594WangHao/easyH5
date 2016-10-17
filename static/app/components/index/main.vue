@@ -29,10 +29,9 @@
                     })
                     .then(this.$utils.throwError)
                     .then(function(response) {
-                        this.$router.push('/edit/' + response.body.data.workId);
-                    }).catch(function(err) {
-                        console.error(err)
+                        this.$router.push('/edit/' + response.body.data._id);
                     })
+                    .catch(this.$utils.catchError);
             }
         }
 

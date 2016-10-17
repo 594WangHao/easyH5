@@ -66,10 +66,10 @@ function postLogin(req, res, next) {
 }
 
 function register(req, res, next) {
-    var userName = xss(req.body.reguserName);
+    var userName = xss(req.body.regUserName);
     var regPassword = xss(req.body.regPassword);
     var regPasswordAgain = xss(req.body.regPasswordAgain);
-
+    console.log(userName,regPassword, regPassword)
     if (regPassword !== regPasswordAgain) {
         // res.send({
         //     code: 0,
@@ -92,7 +92,7 @@ function register(req, res, next) {
                     var user = new User({
                         userName: userName,
                         password: utils.md5(regPassword),
-                        time: moment.format()
+                        createTime: Date.now()
                     })
                     user.save(function(err, results) {
                         if (err) throw err;
@@ -108,9 +108,7 @@ function register(req, res, next) {
                     });
                 }
             })
-            .catch(function(err) {
-                console.error(JSON.stringify(err).red);
-            })
+            .catch(utils.catchError)
     }
 }
 
