@@ -1,9 +1,12 @@
 var Vue = require('vue');
 var VueRouter = require('vue-router');
+var Vuex = require('vuex');
 var VueResource = require('vue-resource');
+
 var Utils = require('./utils/utils.js');
 
 Vue.use(VueRouter);
+Vue.use(Vuex);
 Vue.use(VueResource);
 Vue.use(Utils);
 

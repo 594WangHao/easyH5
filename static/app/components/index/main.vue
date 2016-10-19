@@ -1,5 +1,6 @@
 <template>
     <div>
+        <eh5-head :user="user"></eh5-head>
         <h1>全部作品</h1>
         <ul>
             <li>
@@ -15,7 +16,9 @@
     </div>
 </template>
 <script>
+    var Head = require('../common/head.vue');
     module.exports = {
+        props: ['user'],
         data: function() {
             return {
                 workNameForm: false,
@@ -33,6 +36,9 @@
                     })
                     .catch(this.$utils.catchError);
             }
+        },
+        components: {
+            'eh5-head': Head,
         }
 
     }

@@ -39,7 +39,13 @@ gulp.task('webpack', function(callback) {
                     compress: {
                         warnings: false
                     }
-                })
+                }),
+                new webpack.DefinePlugin({
+                    'process.env': {
+                        NODE_ENV: '"production"'
+                        // NODE_ENV: '"development"'
+                    }
+                }),
             ]
         }))
         .pipe(gulp.dest('./static/dist/js/'));
