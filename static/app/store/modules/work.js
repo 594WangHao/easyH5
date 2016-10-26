@@ -2,19 +2,21 @@ var state = {
     data: {
         pageData: {
             currentPage: 0,
-            list[{
+            list:[{
                 name: 'ddddd'
             }]
         }
     }
 }
 
-var mutations = {}
+var mutations = {
+    changeCurrent: function (state, current) {
+        state.pageData.currentPage = current;
+    }
+}
 
-var actions = {}
 
 module.exports = {
     state: state,
     mutations: mutations,
-    actions: actions
 }

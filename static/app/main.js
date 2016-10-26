@@ -3,12 +3,14 @@ var VueRouter = require('vue-router');
 var Vuex = require('vuex');
 var VueResource = require('vue-resource');
 
-var Utils = require('./utils/utils.js');
+var utils = require('./utils/utils.js');
+var store = require('./store/index.js');
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(VueResource);
-Vue.use(Utils);
+
+Vue.use(utils);
 
 var App = require('./components/app.vue');
 var Edit = require('./components/edit/main.vue');
@@ -16,8 +18,7 @@ var Index = require('./components/index/main.vue');
 
 
 var router = new VueRouter({
-    routes: [
-    {
+    routes: [{
         path: '/edit/:_id',
         component: Edit,
     }, {
@@ -27,5 +28,13 @@ var router = new VueRouter({
 })
 
 
+new Vue({
+    el: '#app',
+    router: router,
+    store: store,
+    render: (function(h) {
+        return h(App)
+    })
+})
 
-new Vue(Vue.util.extend({ router: router }, App)).$mount('#app')
+

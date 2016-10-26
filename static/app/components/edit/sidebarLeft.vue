@@ -11,7 +11,6 @@
 </template>
 <script>
     module.exports = {
-        props: ['pageData'],
         methods: {
             selectPage: function(index) {
                 this.pageData.currentpage = index;

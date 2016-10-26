@@ -106,7 +106,7 @@ gulp.task('start', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch('./static/src/less/*.scss', function() {
+    gulp.watch('./static/src/sass/*.scss', function() {
         gulp.run('css');
     });
     gulp.watch('./static/src/img/**/*', function() {
