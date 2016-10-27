@@ -63,28 +63,28 @@ gulp.task('css', function() {
         .pipe(gulp.dest('./static/dist/css/'))
 });
 
-gulp.task('js', function() {
-    return gulp
-        .src('./static/src/js/entry.js')
-        .pipe(gulpWebpack({
-            watch: true,
-            output: {
-                filename: 'easyH5.js'
-            },
-            plugins: [
-                new webpack.optimize.UglifyJsPlugin({
-                    compress: {
-                        warnings: false
-                    }
-                })
-            ]
-        }))
-        // .pipe(uglify())
-        // .pipe(rename({
-        //     suffix: '.min'
-        // }))
-        .pipe(gulp.dest('./static/dist/js/'))
-});
+// gulp.task('js', function() {
+//     return gulp
+//         .src('./static/src/js/entry.js')
+//         .pipe(gulpWebpack({
+//             watch: true,
+//             output: {
+//                 filename: 'easyH5.js'
+//             },
+//             plugins: [
+//                 new webpack.optimize.UglifyJsPlugin({
+//                     compress: {
+//                         warnings: false
+//                     }
+//                 })
+//             ]
+//         }))
+//         // .pipe(uglify())
+//         // .pipe(rename({
+//         //     suffix: '.min'
+//         // }))
+//         .pipe(gulp.dest('./static/dist/js/'))
+// });
 
 gulp.task('img', function() {
     return gulp

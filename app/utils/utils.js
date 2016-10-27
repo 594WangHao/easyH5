@@ -4,10 +4,13 @@ var colors = require('colors');
 
 module.exports = {
     checkLogin: function(req, res, next) {
+
         if (req.session.user || req.cookies.login) {
             next();
         } else {
-            res.redirect('/login?url=' + req.originalUrl);
+            // res.redirect('/login?url=' + req.originalUrl);
+            // res.send(req.url)
+            res.redirect('/login')
         }
     },
     md5: function(string) {

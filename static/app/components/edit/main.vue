@@ -1,7 +1,7 @@
 <template>
     <div>
         <eh5-head :user="user"></eh5-head>
-        <eh5-sidebar-left></eh5-sidebar-left>
+        <!-- <eh5-sidebar-left></eh5-sidebar-left> -->
         <h1>edit</h1>
     </div>
 </template>
@@ -18,13 +18,13 @@
         created: function() {
             var _id = this.$route.params._id;
             if (_id.length !== 24) {
-                alert('未找到响应作品');
+                alert('未找到相应作品');
                 return;
             }
             this.$http.get('/api/work/' + _id)
                 .then(this.$utils.throwError)
                 .then(function(response) {
-
+                    console.log(this.$store)
                 }).catch(this.$utils.catchError);
 
 
@@ -35,3 +35,4 @@
         }
     }
 </script>
+<!-- http://localhost:3000/#/edit/581201c82765e00dbc92ecd1 -->
